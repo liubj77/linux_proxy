@@ -1,0 +1,15 @@
+
+objects = main.o serialcom.o hdlc.o
+
+serialcom:$(objects)
+	gcc -g -o serialcom $(objects) -lpthread
+main.o:command.h hdlc.h serialcom.h
+	gcc -c -g main.c
+serialcom.o:serialcom.h
+	gcc -c -g serialcom.c 
+hdlc.o: hdlc.h
+	gcc -c -g hdlc.c
+
+.PHONY: clean
+clean:
+	-rm serialcom $(objects)

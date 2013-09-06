@@ -1,0 +1,40 @@
+/***************************/
+#ifndef SERIELCOM_H
+#define SERIELCOM_H
+
+#include <stdio.h>      //标准输入输出定义
+#include <stdlib.h>     //标准函数库定义
+#include <unistd.h>     //Unix标准函数定义
+#include <fcntl.h>
+#include <termios.h>    //POSIX中断控制定义
+#include <errno.h>      //错误号定义
+#include <sys/socket.h>
+#include <netinet/in.h>
+
+#include "hdlc.h"
+
+#define MAX_PACKET_BYTE_SIZE_HDLC 256
+
+
+struct hdlc_buff_t
+{
+    uint16_t    len;
+    uint16_t    idx;
+    uint8_t     data[MAX_PACKET_BYTE_SIZE_HDLC];
+};
+
+struct hdlc_state_t
+{
+	int32_t SockServerfd;  //server socket fd
+	struct sockaddr_in addr_local,addr_server;
+	int32_t comfd;       //serial port fd;
+	uint8_t clientseq;
+	uint8_t commandtype;
+	uint8_t commandack;
+};
+
+int32_t 			open_uart(char *Dev);
+int8_t 			config_uart(int32_t fd,int32_t baud_rate,int32_t data_bits,int32_t stop_bits,uint8_t parity);
+//static int8_t   hdlc_q_byte(struct hdlc_buff_t* lm, uint8_t byte, uint16_t max_size);
+
+#endif

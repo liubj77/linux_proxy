@@ -1,0 +1,4 @@
+Configure UART done.
+Start send and receive data.
+Waiting notification thread to finish...
+Received: ---~--Received: ---~--Translate:subscribe 12--12-Received: ---~--Received: ---~--Received: ---~--Translate:subscribe 12--12-Received: ---~--
